@@ -3,6 +3,7 @@
   "routes": [
     { "src": "/playable-worlds", "dest": "/playable-worlds.html" },
     { "src": "/token", "dest": "/token.html" },
+    { "src": "/whitepaper", "dest": "/whitepaper.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
