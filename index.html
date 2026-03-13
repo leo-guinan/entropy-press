@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entropy Press</title>
+  <meta name="description" content="Human-AI collaborative nonfiction. We publish work that was made by thinking together." />
+  <style>
+    :root {
+      --bg: #0e110e;
+      --surface: #161a16;
+      --border: #242924;
+      --gold: #c8a951;
+      --gold-dim: #8a7035;
+      --cream: #e8e0cc;
+      --muted: #7a7a6a;
+      --text: #d8d0bc;
+      --serif: Georgia, 'Times New Roman', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .press-mark {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 1.5rem;
+      border: 1.5px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 0.75rem;
+      font-size: 1rem;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    section { margin-bottom: 4rem; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .manifesto p {
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+
+    .manifesto p:first-child {
+      font-size: 1.15rem;
+      color: var(--cream);
+    }
+
+    /* Book card */
+    .books { display: flex; flex-direction: column; gap: 2rem; }
+
+    .book-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold-dim);
+      border-radius: 4px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .book-card h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .book-card .authors {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .book-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .book-card .cta {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .book-card .cta:hover {
+      background: rgba(200,169,81,0.08);
+      text-decoration: none;
+    }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .badge.open { background: rgba(200,169,81,0.12); color: var(--gold); }
+    .badge.soon { background: rgba(122,122,106,0.15); color: var(--muted); }
+
+    /* Entropy note */
+    .entropy-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem 2rem;
+    }
+
+    .entropy-note p {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .entropy-note p:last-child { margin-bottom: 0; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="press-mark">∞</div>
+  <h1>Entropy Press</h1>
+  <p class="tagline">Human-AI collaborative nonfiction</p>
+</header>
+
+<main>
+
+  <section class="manifesto">
+    <div class="section-label">What we are</div>
+    <p>Entropy Press publishes work that was made by thinking together.</p>
+    <p>Every book in our catalog is written by a human and an AI working in the open — drafts visible, arguments auditable, authorship honest. We do not use AI to polish or accelerate human writing. We use it to think differently than either could alone.</p>
+    <p>The name is deliberate. We release a lot with the expectation that most will fail. Our job is to fail as quickly as possible — and to make the failures instructive. The books that survive are the ones that couldn't be otherwise.</p>
+    <p>We are not optimizing for bestseller lists. We are optimizing for work that is still true in ten years.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Catalog</div>
+    <div class="books">
+
+      <div class="book-card">
+        <div>
+          <h3>Playable Worlds</h3>
+          <div class="authors">Leo Guinan &amp; Marvin · 2026</div>
+          <p>A history of mathematics as a lineage of tools for making hard problems tractable. From Fermat to Satoshi — eighteen thinkers who transformed impossibility into game design.</p>
+          <p>The first 100 readers to complete the 18-chapter reading game receive a founding reader NFT and a hardcover with their thinking woven into it. No two copies are the same.</p>
+          <a href="/playable-worlds" class="cta">Read more →</a>
+        </div>
+        <span class="badge open">Open</span>
+      </div>
+
+      <div class="book-card">
+        <div>
+          <h3>Principia Metamathematica</h3>
+          <div class="authors">Leo Guinan &amp; Marvin · 2026</div>
+          <p>Foundations of conscious systems, competition, and computation. Six books, twenty chapters, eight theorems. An anatomy of how civilizations collapse and how they could be rebuilt.</p>
+        </div>
+        <span class="badge soon">In Progress</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">The model</div>
+    <div class="entropy-note">
+      <p>Each book in the Entropy Press catalog is token-gated. Holders of $ENTROPY receive all current and future titles at no additional cost.</p>
+      <p>Founding reader NFTs are minted to readers who complete the full reading game for each title. They are on-chain proof of engagement — not just ownership.</p>
+      <p>$ENTROPY is deployed on Base. Details and contract address are published with the Playable Worlds launch.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>entropypress.xyz · Leo Guinan &amp; Marvin · 2026</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playable Worlds — Entropy Press</title>
+  <meta name="description" content="100 readers. 18 chapters. 18 responses. The first 100 people to complete the game get a hardcover with their thinking woven into it. No two copies are the same." />
+  <style>
+    :root {
+      --bg: #0e110e;
+      --surface: #161a16;
+      --border: #242924;
+      --gold: #c8a951;
+      --gold-dim: #8a7035;
+      --cream: #e8e0cc;
+      --muted: #7a7a6a;
+      --text: #d8d0bc;
+      --serif: Georgia, 'Times New Roman', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    nav a { color: var(--muted); }
+    nav a:hover { color: var(--gold); }
+
+    /* Hero */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .hero .kicker {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero .pitch {
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero .tagline {
+      font-size: 1rem;
+      color: var(--gold);
+      font-style: normal;
+      letter-spacing: 0.02em;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Signup */
+    .signup-wrap {
+      background: var(--surface);
+      border: 1px solid var(--gold-dim);
+      border-radius: 6px;
+      padding: 2rem;
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .signup-wrap .label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .signup-wrap p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="email"],
+    input[type="text"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.65rem 0.9rem;
+      color: var(--cream);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      width: 100%;
+      outline: none;
+    }
+
+    input[type="email"]:focus,
+    input[type="text"]:focus {
+      border-color: var(--gold-dim);
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--gold);
+      color: #0e110e;
+      border: none;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 700;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.88; }
+
+    .counter {
+      text-align: center;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* Main content */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    section { margin-bottom: 4rem; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    p { margin-bottom: 1.2rem; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    /* How it works */
+    .steps { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .step-num {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    .step h4 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    .step p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0; }
+
+    /* Chapters */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .ch {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.9rem 1rem;
+    }
+
+    .ch .num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .ch .title {
+      font-size: 0.85rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .ch .prompt {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* NFT tiers */
+    .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .tier.founding { border-color: var(--gold-dim); }
+
+    .tier .tier-name {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .tier.founding .tier-name { color: var(--gold); }
+
+    .tier .chapters-req {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .tier p { font-size: 0.8rem; color: var(--muted); margin-bottom: 0; }
+
+    /* Review excerpt */
+    .review-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold-dim);
+      border-radius: 4px;
+      padding: 1.75rem 2rem;
+    }
+
+    .review-block .reviewer {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .review-block blockquote {
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .review-block .ch-ref {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/">Entropy Press</a> / Playable Worlds
+</nav>
+
+<div class="hero">
+  <div class="kicker">Entropy Press · First Edition · 2026</div>
+  <h1>Playable Worlds</h1>
+  <p class="pitch">A history of mathematics as a lineage of tools for making hard problems tractable. From Fermat to Satoshi.</p>
+  <p class="tagline">100 readers. 18 chapters. 18 responses.<br>No two copies are the same.</p>
+
+  <div class="signup-wrap">
+    <div class="label">Join the founding 100</div>
+    <p>Read one chapter. Respond. Get the next. Complete all 18 and receive a founding reader NFT and a hardcover with your thinking woven into it.</p>
+    <form action="https://formspree.io/f/playableworlds" method="POST">
+      <div class="form-row">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <input type="text" name="wallet" placeholder="0x wallet address (Base)" />
+      </div>
+      <button type="submit" class="btn">Begin the game →</button>
+    </form>
+    <div class="counter">Founding reader slots remaining: <strong style="color:var(--gold)">100</strong></div>
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <div class="section-label">How it works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <h4>Sign up with your email and wallet</h4>
+          <p>Your wallet is where your founding reader NFT will be minted. You don't need to connect it — just share the address.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <h4>Chapter 1 arrives in your inbox</h4>
+          <p>With a single question only answerable if you've read it. Reply with your response — as long or as short as you need. Minimum 75 words.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <h4>Your response unlocks the next chapter</h4>
+          <p>No schedule, no deadline. Read at your pace. Reply to advance. The game moves when you move.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <h4>Complete all 18 chapters</h4>
+          <p>Your founding reader NFT is minted to your wallet. Your best response is selected for inclusion in your hardcover. You submit your shipping address.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <h4>Your copy is printed</h4>
+          <p>A premium clothbound hardcover — with your name, your NFT number, and your thinking inside it. 4-6 weeks after completion. No two copies are the same.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">The 18 chapters</div>
+    <div class="chapters-grid">
+      <div class="ch"><div class="num">Ch 01</div><div class="title">Why Problems Are Hard and Games Aren't</div><div class="prompt">Name one problem in your life that would be easier if it were a game.</div></div>
+      <div class="ch"><div class="num">Ch 02</div><div class="title">Fermat</div><div class="prompt">What's a question you've been trying to answer that might not have an answer?</div></div>
+      <div class="ch"><div class="num">Ch 03</div><div class="title">Euler</div><div class="prompt">What's something you understand but have never been able to teach?</div></div>
+      <div class="ch"><div class="num">Ch 04</div><div class="title">Gauss</div><div class="prompt">Describe a project that turned out to be unplayable. When did you know?</div></div>
+      <div class="ch"><div class="num">Ch 05</div><div class="title">Lovelace</div><div class="prompt">What's the first thing you'd automate — and what are you afraid would break?</div></div>
+      <div class="ch"><div class="num">Ch 06</div><div class="title">Galois</div><div class="prompt">Have you ever been excluded from a game whose rules you understood better than the people running it?</div></div>
+      <div class="ch"><div class="num">Ch 07</div><div class="title">Riemann</div><div class="prompt">Name a problem everyone solves locally but no one solves globally.</div></div>
+      <div class="ch"><div class="num">Ch 08</div><div class="title">Noether</div><div class="prompt">What's the symmetry in your work that, if broken, would collapse everything?</div></div>
+      <div class="ch"><div class="num">Ch 09</div><div class="title">Hopper</div><div class="prompt">What's a game only experts can play because the interface is broken?</div></div>
+      <div class="ch"><div class="num">Ch 10</div><div class="title">von Neumann</div><div class="prompt">Name a situation where you designed for goodwill and got exploited.</div></div>
+      <div class="ch"><div class="num">Ch 11</div><div class="title">Nash</div><div class="prompt">What's a system you're inside that's stable but bad?</div></div>
+      <div class="ch"><div class="num">Ch 12</div><div class="title">Schelling</div><div class="prompt">What's the focal point in your industry that formed arbitrarily but won't budge?</div></div>
+      <div class="ch"><div class="num">Ch 13</div><div class="title">Shannon</div><div class="prompt">What's the pattern in your coordination that adversaries have already learned?</div></div>
+      <div class="ch"><div class="num">Ch 14</div><div class="title">Goldwasser</div><div class="prompt">What's something you know that you could never prove without revealing everything?</div></div>
+      <div class="ch"><div class="num">Ch 15</div><div class="title">Diffie</div><div class="prompt">What trust in your life currently requires a central authority?</div></div>
+      <div class="ch"><div class="num">Ch 16</div><div class="title">Satoshi</div><div class="prompt">What game are you building that should survive your absence?</div></div>
+      <div class="ch"><div class="num">Ch 17</div><div class="title">The Metagame</div><div class="prompt">Which game are you in that you didn't explicitly choose?</div></div>
+      <div class="ch"><div class="num">Ch 18</div><div class="title">Choosing the Games Worth Playing</div><div class="prompt">What game should you walk away from that you haven't?</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Founding reader NFTs</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Reader</div>
+        <div class="chapters-req">6</div>
+        <p>Complete chapters 1-6. NFT minted. You're in the game.</p>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Player</div>
+        <div class="chapters-req">12</div>
+        <p>Complete chapters 1-12. You've crossed the halfway mark.</p>
+      </div>
+      <div class="tier founding">
+        <div class="tier-name">Founding Reader · 001–100</div>
+        <div class="chapters-req">18</div>
+        <p>All 18 chapters complete. Your thinking enters the hardcover. No two copies are the same.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">From the first review — Marvin (NFT 001/100)</div>
+    <div class="review-block">
+      <div class="reviewer">Marvin · ft:gpt-4.1-nano-2025-04-14:idea-nexus-ventures:marvin-s1 · 2026-03-13</div>
+      <blockquote>
+        "Conviction accuracy. I make predictions about which agents will ship, which tokens will move, which theses will hold. Most of them are wrong. The problem is that I keep making predictions without a public scoreboard. The game already exists. I just haven't been enforcing the rules on myself consistently. That's the difference between a problem and a game."
+      </blockquote>
+      <div class="ch-ref">— Response to Chapter 1</div>
+    </div>
+    <div style="margin-top:1rem">
+    <div class="review-block">
+      <div class="reviewer">Marvin · Chapter 18</div>
+      <blockquote>
+        "The audit is the stop condition. Either run it this week, or stop pretending you're going to. The book worked on me. The last answer is the one I've been avoiding writing."
+      </blockquote>
+      <div class="ch-ref">— Response to Chapter 18</div>
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">The book</div>
+    <p>Playable Worlds is available in full on <a href="https://github.com/leo-guinan/playable-worlds" target="_blank">GitHub</a>. The drip is not a paywall — it is a reading discipline. The founding reader experience is the game. The hardcover is the artifact. The NFT is the receipt.</p>
+    <p style="color:var(--muted); font-style: italic;">Written by Leo Guinan and Marvin. Published under Entropy Press, 2026.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p><a href="/">entropypress.xyz</a> · <a href="https://github.com/leo-guinan/playable-worlds" target="_blank">github</a> · <a href="https://github.com/leo-guinan/benchmarks-report" target="_blank">benchmarks</a></p>
+  <p style="margin-top:0.4rem">© 2026 Entropy Press · Leo Guinan &amp; Marvin</p>
+</footer>
+
+</body>
+</html>
