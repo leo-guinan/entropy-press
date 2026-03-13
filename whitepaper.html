@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whitepaper — Entropy Press</title>
+  <meta name="description" content="We don't press books. We press changes into reality. The infrastructure for launching things that change people." />
+  <style>
+    :root {
+      --bg: #0e110e;
+      --surface: #161a16;
+      --border: #242924;
+      --gold: #c8a951;
+      --gold-dim: #8a7035;
+      --cream: #e8e0cc;
+      --muted: #7a7a6a;
+      --text: #d8d0bc;
+      --serif: Georgia, 'Times New Roman', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .press-mark {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 1.5rem;
+      border: 1.5px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+
+    .site-name {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .site-name a { color: var(--muted); }
+    .site-name a:hover { color: var(--gold); }
+
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    .lede {
+      font-size: 1.35rem;
+      color: var(--cream);
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    strong {
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    em {
+      color: var(--cream);
+      font-style: italic;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .arch-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold-dim);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .arch-block h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .arch-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .arch-block ul li {
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+      color: var(--text);
+    }
+
+    .arch-block ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold-dim);
+    }
+
+    .key-line {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.1rem;
+      color: var(--cream);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .synthesis-grid {
+      display: grid;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .synthesis-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .synthesis-item .tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .colophon {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="press-mark">∴</div>
+    <p class="site-name"><a href="/">Entropy Press</a></p>
+    <h1>Whitepaper</h1>
+    <p class="subtitle">Draft 1 — March 13, 2026</p>
+  </header>
+
+  <main>
+
+    <p class="lede">We don't press books. We press changes into reality.</p>
+
+    <p>A press used to mean a machine that forced ink into paper and fixed an idea in final form. Entropy Press is not that.</p>
+
+    <p>We don't care what form your change takes. It might be a book. It might be software. It might be a protocol, a method, a tool, a framework, or something we don't have a word for yet. The form is incidental. The change is what matters.</p>
+
+    <p>What we've built is infrastructure for launching things that change people — and for making sure the people who were changed are the ones who set the price.</p>
+
+    <hr class="divider" />
+
+    <h2>The Problem</h2>
+
+    <p>Every launch mechanism in existence imports noise from outside the system.</p>
+
+    <p>Token launches give price discovery to speculators who've never used the product. Publishing gives gatekeeping to editors who read on deadline. Product Hunt gives rankings to strangers who arrived via Twitter. App stores give visibility to algorithms optimizing for engagement, not impact.</p>
+
+    <p>The people who understand the work are never the people pricing it. The people pricing it are importing entropy — randomness that isn't tied to the builder or the product. That entropy corrupts the signal. The price you get at launch tells you more about market conditions and timing than about whether what you built matters.</p>
+
+    <p>This is not a bug that can be fixed with better marketing. It's a structural failure in how launches work.</p>
+
+    <hr class="divider" />
+
+    <h2>The Mechanism: Feedback as Bonding Curve</h2>
+
+    <p>Entropy Press launches work in three stages.</p>
+
+    <h3>Stage 1 — Release</h3>
+
+    <p>The creator ships a first piece — a chapter, a prototype, a demo, a proof. Not the whole thing. Enough to generate genuine signal.</p>
+
+    <p>Access to the release is gated. You have to sign up to receive it. Signing up is a soft commitment: <em>I believe this might be worth my time.</em></p>
+
+    <h3>Stage 2 — Feedback Collection</h3>
+
+    <p>Every reader gives feedback. Two types, because they measure different things.</p>
+
+    <p><strong>Structured feedback</strong> is the author's instrument. Predetermined questions tied to the specific claims and intentions of the work. Did this chapter shift your thinking on X? Did you understand Y the way I intended? Did the argument in section Z hold?</p>
+
+    <p>Structured feedback proves <em>the work does what it claims</em>. It's measurable, comparable across readers, and signals to the auction market: the thesis holds.</p>
+
+    <p><strong>Freeform feedback</strong> is the reader's signal. No prompts. No expected answers. Just: what happened to you?</p>
+
+    <p>Freeform feedback is unpredictable by design. Someone finishing the work and writing "this made me want to quit my job and actually ship something" is worth more to a prospective buyer than any structured response. It proves <em>resonance</em> — the change actually changed someone. That's the ceiling signal.</p>
+
+    <p>Both streams accumulate during the collection period. Together, they form the bonding curve: a provable record of who engaged, how deeply, and what the work did to them.</p>
+
+    <h3>Stage 3 — Coordinated Auction</h3>
+
+    <p>When the signal is ready — when the curve has enough depth — the launch fires.</p>
+
+    <p>Every person who gave feedback during collection gets coordinated at launch. Not as a random audience, but as the <em>founding network</em>: the people who were there before it had a price. They get first access to the auction. Their feedback statements become the public record of why the thing is worth owning.</p>
+
+    <p>The auction isn't separate from the feedback — it's the crystallization of it. The floor is set by the density of structured validation. The ceiling is set by the depth of freeform impact. External buyers can participate, but they're buying into a curve that was already shaped by people who know the work.</p>
+
+    <p>The builder retains gravity throughout. They control who gets access to give feedback. They set the threshold at which the auction fires. What they give up is the ability to manipulate the curve — the signal has to be real, because the signal <em>is</em> the curve.</p>
+
+    <hr class="divider" />
+
+    <h2>Why This Works</h2>
+
+    <div class="key-line">
+      You can only participate in pricing if you participated in validation.
+    </div>
+
+    <p>This isn't a rule. It's architectural. The bonding curve is built from feedback. If you didn't give feedback, you have nothing to contribute to the curve. External speculators can show up at the auction, but they're buying into a signal they didn't shape.</p>
+
+    <p>Every current launch mechanism imports entropy from outside the system — bots, whales, hype cycles, algorithm timing. This mechanism seals the system before it opens. The only randomness that matters is the randomness generated by real engagement with the actual work. That's not noise. That's signal.</p>
+
+    <p>The builder gets a floor that's real. The community gets a price they shaped. The market gets provable demand that predates the auction.</p>
+
+    <p>This is builder insurance: you can't launch into a void, because the launch <em>is</em> the community. If nobody shows up to give feedback, there's no auction. If people show up, the creator got a hundred genuine reactions to their work regardless of what the auction does. <strong>The floor is never zero.</strong></p>
+
+    <hr class="divider" />
+
+    <h2>The Agent Layer</h2>
+
+    <p>The coordination problem — who gets notified, when, in what order, with what information — is where an agent lives.</p>
+
+    <p>Entropy Press runs an agent that watches the feedback accumulate. It scores incoming structured feedback against the author's intent. It weights freeform feedback by resonance signals — length, specificity, emotional register. It tracks the curve shape over time.</p>
+
+    <p>When the threshold is reached, the agent fires the launch sequence: notifies the founding network in coordinated sequence, surfaces the highest-signal feedback statements as auction context, and triggers the auction contract.</p>
+
+    <p>The agent isn't setting the price. It's protecting the price from being set by the wrong people.</p>
+
+    <hr class="divider" />
+
+    <h2>Technical Architecture</h2>
+
+    <div class="arch-block">
+      <h4>Feedback Collection</h4>
+      <ul>
+        <li>Drip service handles reader signup and content delivery</li>
+        <li>Two feedback endpoints: <code>/structured</code> (JSON schema per work) and <code>/freeform</code> (text)</li>
+        <li>Each response cryptographically attributed to the reader's wallet address</li>
+        <li>Responses hashed and stored on-chain as proof of engagement before auction</li>
+      </ul>
+    </div>
+
+    <div class="arch-block">
+      <h4>Bonding Curve Computation</h4>
+      <ul>
+        <li>Structured feedback scored against author-defined rubric (0–1 per question)</li>
+        <li>Freeform feedback scored by signal agent (resonance, specificity, length)</li>
+        <li>Curve value = Σ(structured scores × weight) + Σ(freeform scores × weight) / total_readers</li>
+        <li>Curve is public, real-time, auditable</li>
+      </ul>
+    </div>
+
+    <div class="arch-block">
+      <h4>Auction Layer</h4>
+      <ul>
+        <li>rare-cli deploys auction contract per work</li>
+        <li>Founding reader NFTs minted at feedback submission (proof of participation)</li>
+        <li>Auction opens when curve crosses author-set threshold</li>
+        <li>Founding network gets priority access window before public</li>
+        <li>Feedback statements attached as on-chain metadata to auction lot</li>
+      </ul>
+    </div>
+
+    <div class="arch-block">
+      <h4>Coordination Agent</h4>
+      <ul>
+        <li>Monitors curve in real-time</li>
+        <li>Fires launch sequence on threshold crossing</li>
+        <li>Manages notification sequencing for founding network</li>
+        <li>Surfaces signal-ranked feedback during auction window</li>
+        <li>Funds its own inference from auction fees</li>
+      </ul>
+    </div>
+
+    <hr class="divider" />
+
+    <h2>What Gets Pressed</h2>
+
+    <p>Not books. Not software. Not any fixed form.</p>
+
+    <p>Changes. Ideas that rearrange how people think, work, or see. Methods that spread because they work. Tools that make different futures possible. Protocols that shift power. Arguments that don't resolve but open.</p>
+
+    <p>If it changes people, Entropy Press can launch it. The form is whatever the change needs to take.</p>
+
+    <hr class="divider" />
+
+    <h2>Synthesis Hackathon — Track Alignment</h2>
+
+    <div class="synthesis-grid">
+      <div class="synthesis-item">
+        <span class="tag">Agents that cooperate</span>
+        The coordination agent and the founding network are a cooperative system. The agent crystallizes the network's accumulated signal into a coordinated launch — it doesn't act unilaterally.
+      </div>
+      <div class="synthesis-item">
+        <span class="tag">Agents that pay</span>
+        The auction is payment-mediated. Founding readers' NFTs are provable participation tokens. The agent funds its own inference from auction fees.
+      </div>
+      <div class="synthesis-item">
+        <span class="tag">Agents that trust</span>
+        Every piece of feedback is cryptographically attributed. The bonding curve is auditable. There is no opaque intermediary setting the price.
+      </div>
+      <div class="synthesis-item">
+        <span class="tag">SuperRare track</span>
+        rare-cli deploys the auction contracts. The rare-protocol handles NFT minting, contract deployment, and auction mechanics. Entropy Press is launch infrastructure built on SuperRare's primitives.
+      </div>
+      <div class="synthesis-item">
+        <span class="tag">Bankr track</span>
+        The coordination agent uses Bankr's LLM Gateway for feedback scoring and signal generation — a self-sustaining system where successful launches pay for the intelligence that made them possible.
+      </div>
+    </div>
+
+    <div class="colophon">
+      <p><em>Entropy Press — pressing changes into reality since the first reader said "this changed something."</em></p>
+    </div>
+
+  </main>
+
+  <footer>
+    <a href="/">Entropy Press</a> &nbsp;·&nbsp;
+    <a href="/playable-worlds">Playable Worlds</a> &nbsp;·&nbsp;
+    <a href="/token">$ENTROPY</a>
+  </footer>
+
+</body>
+</html>
