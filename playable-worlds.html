@@ -355,14 +355,61 @@
   <div class="signup-wrap">
     <div class="label">Join the founding 100</div>
     <p>Read one chapter. Respond. Get the next. Complete all 18 and receive a founding reader NFT and a hardcover with your thinking woven into it.</p>
-    <form action="https://formspree.io/f/playableworlds" method="POST">
+    <form id="signup-form">
       <div class="form-row">
-        <input type="email" name="email" placeholder="your@email.com" required />
-        <input type="text" name="wallet" placeholder="0x wallet address (Base)" />
+        <input type="email" id="f-email" placeholder="your@email.com" required />
+        <input type="text" id="f-wallet" placeholder="0x wallet address (Base)" />
       </div>
-      <button type="submit" class="btn">Begin the game →</button>
+      <button type="submit" class="btn" id="submit-btn">Begin the game →</button>
     </form>
-    <div class="counter">Founding reader slots remaining: <strong style="color:var(--gold)">100</strong></div>
+    <div id="form-msg" style="margin-top:0.75rem;font-family:var(--mono);font-size:0.75rem;display:none"></div>
+    <div class="counter">Founding reader slots remaining: <strong id="slots-remaining" style="color:var(--gold)">100</strong></div>
+    <script>
+      // Load live slot count
+      fetch('https://drip.entropypress.xyz/stats')
+        .then(r => r.json())
+        .then(d => { document.getElementById('slots-remaining').textContent = d.slots_remaining })
+        .catch(() => {})
+
+      document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const btn = document.getElementById('submit-btn')
+        const msg = document.getElementById('form-msg')
+        const email = document.getElementById('f-email').value
+        const wallet = document.getElementById('f-wallet').value
+
+        btn.disabled = true
+        btn.textContent = 'Sending...'
+        msg.style.display = 'none'
+
+        try {
+          const res = await fetch('https://drip.entropypress.xyz/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, wallet })
+          })
+          const data = await res.json()
+          if (res.ok) {
+            msg.style.color = 'var(--gold)'
+            msg.textContent = '✓ Chapter 1 is on its way. Check your inbox.'
+            msg.style.display = 'block'
+            btn.textContent = 'You\'re in.'
+          } else {
+            msg.style.color = '#e05c5c'
+            msg.textContent = data.error || 'Something went wrong.'
+            msg.style.display = 'block'
+            btn.disabled = false
+            btn.textContent = 'Begin the game →'
+          }
+        } catch (err) {
+          msg.style.color = '#e05c5c'
+          msg.textContent = 'Could not connect. Try again.'
+          msg.style.display = 'block'
+          btn.disabled = false
+          btn.textContent = 'Begin the game →'
+        }
+      })
+    </script>
   </div>
 </div>
 
