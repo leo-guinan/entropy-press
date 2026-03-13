@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$ENTROPY — Entropy Press</title>
+  <meta name="description" content="$ENTROPY is the token for Entropy Press — a publishing imprint for human-AI collaborative nonfiction. Holders access all current and future titles." />
+  <style>
+    :root {
+      --bg: #0e110e;
+      --surface: #161a16;
+      --border: #242924;
+      --gold: #c8a951;
+      --gold-dim: #8a7035;
+      --cream: #e8e0cc;
+      --muted: #7a7a6a;
+      --text: #d8d0bc;
+      --serif: Georgia, 'Times New Roman', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.8; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    nav a { color: var(--muted); }
+    nav a:hover { color: var(--gold); }
+
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .token-mark {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 2rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--gold-dim);
+    }
+    .token-mark img { width: 100%; height: 100%; object-fit: cover; }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .hero .subtitle {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 2rem;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      font-style: italic;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--gold); color: #0e110e; font-weight: 700; }
+    .btn-outline { border: 1px solid var(--gold-dim); color: var(--gold); }
+
+    .contract {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-top: 1.5rem;
+      word-break: break-all;
+    }
+    .contract span { color: var(--gold-dim); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+    section { margin-bottom: 4rem; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    p { margin-bottom: 1.1rem; color: var(--text); }
+
+    /* Utility grid */
+    .utility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .utility-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+    .utility-card .icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .utility-card h4 { font-size: 0.9rem; font-weight: 400; color: var(--cream); margin-bottom: 0.4rem; }
+    .utility-card p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+
+    /* Catalog */
+    .catalog { display: flex; flex-direction: column; gap: 1rem; }
+    .catalog-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold-dim);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      gap: 1rem;
+    }
+    .catalog-item h3 { font-size: 1rem; font-weight: 400; color: var(--cream); margin-bottom: 0.25rem; }
+    .catalog-item p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge.live { background: rgba(200,169,81,0.12); color: var(--gold); }
+    .badge.soon { background: rgba(122,122,106,0.15); color: var(--muted); }
+
+    /* Stats row */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat .value { font-size: 1.8rem; font-weight: 400; color: var(--gold); font-family: var(--serif); }
+    .stat .label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.4rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/">Entropy Press</a> / $ENTROPY
+</nav>
+
+<div class="hero">
+  <div class="token-mark">
+    <img src="/entropy-press-logo.png" alt="Entropy Press" />
+  </div>
+  <h1>$ENTROPY</h1>
+  <div class="subtitle">Entropy Press · Base Network</div>
+  <p>The token for a publishing imprint that was made by thinking together. Holders access every title in the catalog — now and as the catalog grows.</p>
+  <div class="cta-row">
+    <a href="https://frame.fun/tokens/0x2cBE0EA2BD83C5D5e3D12eBdA53319EAe7163561" target="_blank" class="btn btn-primary">Buy $ENTROPY →</a>
+    <a href="/playable-worlds" class="btn btn-outline">Read the book</a>
+  </div>
+  <div class="contract">
+    <span>Contract (Base):</span> 0x2cBE0EA2BD83C5D5e3D12eBdA53319EAe7163561
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <div class="section-label">What it is</div>
+    <p>Entropy Press publishes nonfiction written by humans and AI working in the open — drafts visible, arguments auditable, authorship honest. $ENTROPY is the access layer for everything we publish.</p>
+    <p>The token doesn't represent one book. It represents the imprint. Every future Entropy Press title adds value to the same token. The catalog is the product.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Token utility</div>
+    <div class="utility-grid">
+      <div class="utility-card">
+        <div class="icon">📖</div>
+        <h4>Full catalog access</h4>
+        <p>Hold $ENTROPY to access all current and future Entropy Press titles at no additional cost.</p>
+      </div>
+      <div class="utility-card">
+        <div class="icon">🎟</div>
+        <h4>Founding reader priority</h4>
+        <p>Token holders get first access to new title launches and founding reader slots before public release.</p>
+      </div>
+      <div class="utility-card">
+        <div class="icon">∞</div>
+        <h4>Grows with the catalog</h4>
+        <p>Each new title published under Entropy Press increases the value of what a single token unlocks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Current catalog</div>
+    <div class="catalog">
+      <div class="catalog-item">
+        <div>
+          <h3>Playable Worlds</h3>
+          <p>Leo Guinan &amp; Marvin · 2026 · 18 chapters · 100 founding readers</p>
+        </div>
+        <span class="badge live">Live</span>
+      </div>
+      <div class="catalog-item">
+        <div>
+          <h3>Principia Metamathematica</h3>
+          <p>Leo Guinan &amp; Marvin · 2026 · Foundations of conscious systems</p>
+        </div>
+        <span class="badge soon">In progress</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Founding reader numbers</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="value" id="slots-taken">—</div>
+        <div class="label">Readers enrolled</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="slots-remaining">100</div>
+        <div class="label">Slots remaining</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="completions">—</div>
+        <div class="label">Hardcovers earned</div>
+      </div>
+    </div>
+    <script>
+      fetch('https://drip.entropypress.xyz/stats')
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById('slots-taken').textContent = d.slots_taken
+          document.getElementById('slots-remaining').textContent = d.slots_remaining
+          document.getElementById('completions').textContent = d.completions
+        })
+        .catch(() => {})
+    </script>
+  </section>
+
+  <section>
+    <div class="section-label">Links</div>
+    <p>
+      <a href="https://frame.fun/tokens/0x2cBE0EA2BD83C5D5e3D12eBdA53319EAe7163561" target="_blank">frame.fun token page</a>
+      &nbsp;·&nbsp;
+      <a href="/playable-worlds">Playable Worlds</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/leo-guinan/playable-worlds" target="_blank">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/leo-guinan/entropy-press" target="_blank">Site source</a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>entropypress.xyz · Leo Guinan &amp; Marvin · 2026</p>
+</footer>
+
+</body>
+</html>

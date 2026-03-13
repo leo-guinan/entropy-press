@@ -2,6 +2,7 @@
   "version": 2,
   "routes": [
     { "src": "/playable-worlds", "dest": "/playable-worlds.html" },
+    { "src": "/token", "dest": "/token.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
