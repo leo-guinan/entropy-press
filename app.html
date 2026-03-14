@@ -350,11 +350,15 @@
     </div>
   </div>
 
+  <script>
+    // Fire ready() immediately via raw postMessage — before any module imports resolve.
+    // This is what sdk.actions.ready() does internally.
+    try { window.parent.postMessage({ type: 'ready' }, '*'); } catch (_) {}
+  </script>
   <script type="module">
-    // @farcaster/miniapp-sdk is the current package (frame-sdk is deprecated)
     import { sdk as fcSdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
 
-    // Call ready() IMMEDIATELY — before any async work — to dismiss splash screen
+    // Also call via SDK once loaded (belt-and-suspenders)
     try { await fcSdk.actions.ready(); } catch (_) {}
 
     (async function () {
