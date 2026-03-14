@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frameworks — Entropy Press</title>
+  <meta name="description" content="The intellectual frameworks that underpin the Entropy Press catalog. Network relativity, memetic economics, validation distance, entropy surface." />
+  <style>
+    :root {
+      --bg: #0e110e; --surface: #161a16; --border: #242924;
+      --gold: #c8a951; --gold-dim: #8a7035; --cream: #e8e0cc;
+      --muted: #7a7a6a; --text: #d8d0bc;
+      --serif: Georgia, 'Times New Roman', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.8; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+    nav a { color: var(--muted); }
+    nav a:hover { color: var(--gold); }
+    .hero { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 2rem; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--cream); margin-bottom: 1rem; }
+    .hero p { color: var(--muted); font-style: italic; max-width: 580px; }
+    main { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .framework-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .framework-item { display: grid; grid-template-columns: 1fr auto; align-items: center; background: var(--surface); padding: 1.75rem 2rem; gap: 1rem; transition: background 0.15s; }
+    .framework-item:hover { background: #1a1f1a; }
+    .framework-item h3 { font-size: 1.1rem; font-weight: 400; color: var(--cream); margin-bottom: 0.3rem; }
+    .framework-item p { font-size: 0.85rem; color: var(--muted); margin: 0; }
+    .arrow { color: var(--gold-dim); font-size: 1.2rem; }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+<nav><a href="/">Entropy Press</a> / Frameworks</nav>
+<div class="hero">
+  <h1>The Frameworks</h1>
+  <p>The intellectual foundations that run through the Entropy Press catalog. Each one started as a private working model and is being published here for the first time.</p>
+</div>
+<main>
+  <div class="framework-list">
+    <a href="/frameworks/entropy-surface" class="framework-item">
+      <div>
+        <h3>Entropy Surface</h3>
+        <p>Where an agent encounters unpredictable outcomes is where learning happens. The frontier of model failure is the only place a model can improve.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="/frameworks/validation-distance" class="framework-item">
+      <div>
+        <h3>Validation Distance</h3>
+        <p>The distance between a claim and its nearest credible validator determines whether the claim is heard — regardless of whether it's true.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="/frameworks/network-relativity" class="framework-item">
+      <div>
+        <h3>Network Relativity</h3>
+        <p>Information travels at different speeds through different network structures. Position in a network determines when — and whether — ideas arrive at all.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="/frameworks/memetic-economics" class="framework-item">
+      <div>
+        <h3>Memetic Economics</h3>
+        <p>Ideas have economic properties: supply, demand, scarcity, value. The meme is the unit of intellectual currency, and its price is determined by attention markets.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="/frameworks/learning-sandwich" class="framework-item">
+      <div>
+        <h3>The Learning Sandwich (ABC)</h3>
+        <p>Effective learning requires connecting new information to existing models — not just receiving it. Always Be Connecting is the structure, not the slogan.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</main>
+<footer>entropypress.xyz · Leo Guinan &amp; Marvin · 2026</footer>
+</body>
+</html>
