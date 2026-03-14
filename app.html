@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playable Worlds — Founding Reader | Entropy Press</title>
+  <meta name="description" content="Claim your founding reader slot for Playable Worlds, a human-AI collaborative book where readers set the price." />
+
+  <!-- Farcaster Frame meta -->
+  <meta name="fc:frame" content="vNext" />
+  <meta name="fc:frame:image" content="https://entropypress.xyz/entropy-press-logo-v2.png" />
+
+  <style>
+    :root {
+      --bg: #0e110e;
+      --surface: #161a16;
+      --border: #242924;
+      --gold: #c8a951;
+      --gold-dim: #8a7035;
+      --cream: #e8e0cc;
+      --muted: #7a7a6a;
+      --text: #d8d0bc;
+      --serif: Georgia, 'Times New Roman', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 390px;
+      width: 100%;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .press-mark {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 1rem;
+      border: 1.5px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
+    .slot-count {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .user-badge img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+    }
+
+    .user-badge .name {
+      color: var(--cream);
+      font-size: 0.9rem;
+    }
+
+    .user-badge .fid {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    .pitch {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .question {
+      font-size: 0.95rem;
+      color: var(--cream);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--gold-dim);
+    }
+
+    label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      padding: 0.6rem 0.75rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--gold-dim);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    button {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    button:disabled:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .error-msg {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: #c85151;
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+
+    .confirmation {
+      text-align: center;
+    }
+
+    .confirmation h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .confirmation p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .confirmation .email-note {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .share-btn {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .share-btn:hover {
+      background: var(--cream);
+    }
+
+    .hidden { display: none; }
+
+    .loading {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Loading state -->
+    <div id="screen-loading" class="loading">
+      <div class="press-mark">EP</div>
+      <p>Loading...</p>
+    </div>
+
+    <!-- Landing screen -->
+    <div id="screen-landing" class="hidden">
+      <div class="header">
+        <div class="press-mark">EP</div>
+        <h1>Playable Worlds</h1>
+        <div class="subtitle">Founding Reader</div>
+      </div>
+
+      <div id="slot-count" class="slot-count">Loading slots...</div>
+
+      <div id="user-badge" class="user-badge hidden">
+        <img id="user-pfp" src="" alt="" />
+        <div>
+          <div id="user-name" class="name"></div>
+          <div id="user-fid" class="fid"></div>
+        </div>
+      </div>
+
+      <p class="pitch">A book that's also a game, co-authored by human and AI. The agent reads it first. You read it next — and your feedback shapes what it's worth.</p>
+
+      <div class="section-label">Chapter 1 Question</div>
+      <p class="question">Name a problem in your life that would be easier if it were a game. What's the scoreboard?</p>
+
+      <form id="signup-form">
+        <div class="field">
+          <label for="email">Email (chapters delivered here)</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com" />
+        </div>
+        <div class="field">
+          <label for="answer">Your answer</label>
+          <textarea id="answer" name="answer" required placeholder="What problem, and how would you keep score?"></textarea>
+        </div>
+        <button type="submit" id="submit-btn">Claim founding reader slot</button>
+        <div id="error-msg" class="error-msg hidden"></div>
+      </form>
+    </div>
+
+    <!-- Confirmation screen -->
+    <div id="screen-confirm" class="hidden confirmation">
+      <div class="header">
+        <div class="press-mark">EP</div>
+        <h1>Playable Worlds</h1>
+        <div class="subtitle">Founding Reader</div>
+      </div>
+
+      <h2 id="confirm-slot"></h2>
+      <p id="confirm-email" class="email-note"></p>
+      <button id="share-btn" class="share-btn">Share on Farcaster</button>
+    </div>
+
+    <!-- Slots full screen -->
+    <div id="screen-full" class="hidden confirmation">
+      <div class="header">
+        <div class="press-mark">EP</div>
+        <h1>Playable Worlds</h1>
+        <div class="subtitle">Founding Reader</div>
+      </div>
+      <h2>All 100 founding reader slots are claimed.</h2>
+      <p>Follow <a href="https://warpcast.com/hitchhikerglitch">@hitchhikerglitch</a> on Farcaster for updates.</p>
+    </div>
+
+    <!-- Already signed up screen -->
+    <div id="screen-already" class="hidden confirmation">
+      <div class="header">
+        <div class="press-mark">EP</div>
+        <h1>Playable Worlds</h1>
+        <div class="subtitle">Founding Reader</div>
+      </div>
+      <h2>You're already on the list.</h2>
+      <p>Chapter 1 should be in your inbox.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/bundle.min.js"></script>
+  <script>
+    (async function () {
+      const DRIP_BASE = 'https://drip.entropypress.xyz';
+
+      // DOM refs
+      const screenLoading = document.getElementById('screen-loading');
+      const screenLanding = document.getElementById('screen-landing');
+      const screenConfirm = document.getElementById('screen-confirm');
+      const screenFull = document.getElementById('screen-full');
+      const screenAlready = document.getElementById('screen-already');
+      const slotCountEl = document.getElementById('slot-count');
+      const userBadge = document.getElementById('user-badge');
+      const userPfp = document.getElementById('user-pfp');
+      const userName = document.getElementById('user-name');
+      const userFid = document.getElementById('user-fid');
+      const form = document.getElementById('signup-form');
+      const submitBtn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('error-msg');
+      const confirmSlot = document.getElementById('confirm-slot');
+      const confirmEmail = document.getElementById('confirm-email');
+      const shareBtn = document.getElementById('share-btn');
+
+      let sdk = null;
+      let fcUser = null;
+
+      // Initialize Farcaster SDK
+      try {
+        sdk = window.FrameSDK;
+        if (sdk) {
+          await sdk.actions.ready();
+          const context = await sdk.context;
+          if (context && context.user) {
+            fcUser = context.user;
+          }
+        }
+      } catch (e) {
+        // SDK unavailable — running in regular browser
+      }
+
+      // Show user badge if we have Farcaster context
+      if (fcUser) {
+        if (fcUser.pfpUrl) {
+          userPfp.src = fcUser.pfpUrl;
+          userPfp.alt = fcUser.displayName || fcUser.username || '';
+        }
+        userName.textContent = fcUser.displayName || fcUser.username || '';
+        userFid.textContent = fcUser.username ? '@' + fcUser.username : 'FID ' + fcUser.fid;
+        userBadge.classList.remove('hidden');
+      }
+
+      // Fetch slot count
+      let slotsRemaining = null;
+      try {
+        const res = await fetch(DRIP_BASE + '/stats');
+        const data = await res.json();
+        const count = data.count || data.signups || 0;
+        slotsRemaining = Math.max(0, 100 - count);
+        slotCountEl.textContent = 'Slot ' + (count + 1) + ' of 100 remaining';
+      } catch (e) {
+        slotCountEl.textContent = 'Founding reader slots available';
+      }
+
+      // Show landing
+      screenLoading.classList.add('hidden');
+
+      if (slotsRemaining === 0) {
+        screenFull.classList.remove('hidden');
+        return;
+      }
+
+      screenLanding.classList.remove('hidden');
+
+      // Form submission
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorMsg.classList.add('hidden');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Claiming...';
+
+        const email = document.getElementById('email').value.trim();
+        const answer = document.getElementById('answer').value.trim();
+
+        if (!email || !answer) {
+          showError('Please fill in both fields.');
+          return;
+        }
+
+        // Build wallet identity from Farcaster context
+        let wallet = 'fc:unknown';
+        if (fcUser && fcUser.fid) {
+          wallet = 'fc:' + fcUser.fid + ':' + (fcUser.username || 'unknown');
+        }
+
+        try {
+          const res = await fetch(DRIP_BASE + '/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, wallet: wallet })
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            // Success
+            const slotNum = data.slot || data.count || '?';
+            screenLanding.classList.add('hidden');
+            confirmSlot.textContent = "You're founding reader #" + slotNum;
+            confirmEmail.textContent = 'Chapter 1 is on its way to ' + email;
+            screenConfirm.classList.remove('hidden');
+          } else if (res.status === 409 || (data.error && data.error.toLowerCase().includes('already'))) {
+            screenLanding.classList.add('hidden');
+            screenAlready.classList.remove('hidden');
+          } else if (res.status === 410 || (data.error && data.error.toLowerCase().includes('full'))) {
+            screenLanding.classList.add('hidden');
+            screenFull.classList.remove('hidden');
+          } else {
+            showError(data.error || 'Something went wrong. Try again or visit entropypress.xyz/playable-worlds');
+          }
+        } catch (err) {
+          showError('Something went wrong. Try again or visit entropypress.xyz/playable-worlds');
+        }
+      });
+
+      // Share button
+      shareBtn.addEventListener('click', function () {
+        const text = encodeURIComponent('I just claimed a founding reader slot for Playable Worlds \u2014 a book where readers set the price. @hitchhikerglitch');
+        const embed = encodeURIComponent('https://entropypress.xyz/app');
+        const url = 'https://warpcast.com/~/compose?text=' + text + '&embeds[]=' + embed;
+
+        if (sdk && sdk.actions && sdk.actions.openUrl) {
+          sdk.actions.openUrl(url);
+        } else {
+          window.open(url, '_blank');
+        }
+      });
+
+      function showError(msg) {
+        errorMsg.textContent = msg;
+        errorMsg.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Claim founding reader slot';
+      }
+    })();
+  </script>
+</body>
+</html>

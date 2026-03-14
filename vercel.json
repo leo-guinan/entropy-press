@@ -9,9 +9,17 @@
     { "src": "/frameworks/network-relativity", "dest": "/frameworks/network-relativity.html" },
     { "src": "/frameworks/memetic-economics", "dest": "/frameworks/memetic-economics.html" },
     { "src": "/frameworks/learning-sandwich", "dest": "/frameworks/learning-sandwich.html" },
+    { "src": "/app", "dest": "/app.html" },
+    { "src": "/.well-known/farcaster.json", "dest": "/.well-known/farcaster.json" },
     { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
+    {
+      "source": "/.well-known/farcaster.json",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
