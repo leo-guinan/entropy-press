@@ -350,8 +350,13 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/bundle.min.js"></script>
-  <script>
+  <script type="module">
+    // @farcaster/miniapp-sdk is the current package (frame-sdk is deprecated)
+    import { sdk as fcSdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
+
+    // Call ready() IMMEDIATELY — before any async work — to dismiss splash screen
+    try { await fcSdk.actions.ready(); } catch (_) {}
+
     (async function () {
       const DRIP_BASE = 'https://drip.entropypress.xyz';
 
@@ -373,21 +378,17 @@
       const confirmEmail = document.getElementById('confirm-email');
       const shareBtn = document.getElementById('share-btn');
 
-      let sdk = null;
+      let sdk = fcSdk;
       let fcUser = null;
 
-      // Initialize Farcaster SDK
+      // Get Farcaster user context
       try {
-        sdk = window.FrameSDK;
-        if (sdk) {
-          await sdk.actions.ready();
-          const context = await sdk.context;
-          if (context && context.user) {
-            fcUser = context.user;
-          }
+        const context = await fcSdk.context;
+        if (context && context.user) {
+          fcUser = context.user;
         }
       } catch (e) {
-        // SDK unavailable — running in regular browser
+        // Context unavailable — running in regular browser
       }
 
       // Show user badge if we have Farcaster context
@@ -495,5 +496,6 @@
       }
     })();
   </script>
+
 </body>
 </html>
