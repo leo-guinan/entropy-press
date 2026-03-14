@@ -8,6 +8,7 @@
     { "src": "/frameworks/validation-distance", "dest": "/frameworks/validation-distance.html" },
     { "src": "/frameworks/network-relativity", "dest": "/frameworks/network-relativity.html" },
     { "src": "/frameworks/memetic-economics", "dest": "/frameworks/memetic-economics.html" },
+    { "src": "/frameworks/learning-sandwich", "dest": "/frameworks/learning-sandwich.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [

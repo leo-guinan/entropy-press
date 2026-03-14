@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Learning Sandwich (ABC) — Entropy Press Frameworks</title>
+  <meta name="description" content="Effective learning requires connecting new information to existing models — not just receiving it. Always Be Connecting is the structure, not the slogan." />
+  <style>
+    :root { --bg:#0e110e; --surface:#161a16; --border:#242924; --gold:#c8a951; --gold-dim:#8a7035; --cream:#e8e0cc; --muted:#7a7a6a; --text:#d8d0bc; --serif:Georgia,'Times New Roman',serif; --mono:'JetBrains Mono','Fira Code',monospace; }
+    *{box-sizing:border-box;margin:0;padding:0} body{background:var(--bg);color:var(--text);font-family:var(--serif);line-height:1.85}
+    a{color:var(--gold);text-decoration:none} a:hover{text-decoration:underline}
+    nav{padding:1.25rem 2rem;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase}
+    nav a{color:var(--muted)} nav a:hover{color:var(--gold)}
+    .wrap{max-width:680px;margin:0 auto;padding:4rem 2rem 6rem}
+    .kicker{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.5rem}
+    h1{font-size:clamp(2rem,5vw,3rem);font-weight:400;color:var(--cream);margin-bottom:2rem;line-height:1.2}
+    h2{font-size:1.1rem;font-weight:400;color:var(--cream);margin:2.5rem 0 0.75rem}
+    p{margin-bottom:1.2rem;color:var(--text)}
+    .lede{font-size:1.1rem;color:var(--cream);font-style:italic;margin-bottom:2rem;line-height:1.7}
+    blockquote{border-left:3px solid var(--gold-dim);padding:0.75rem 1.5rem;margin:1.5rem 0;color:var(--muted);font-style:italic}
+    .sandwich{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin:2rem 0}
+    .sandwich-layer{padding:0.6rem 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:120px 1fr;gap:1rem;align-items:start}
+    .sandwich-layer:last-child{border-bottom:none}
+    .layer-label{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dim);padding-top:0.15rem}
+    .layer-text{font-size:0.9rem;color:var(--text)}
+    .divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+    .book-link{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold-dim);border-radius:4px;padding:1.25rem 1.5rem;margin-top:3rem}
+    .book-link p{color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem}
+  </style>
+</head>
+<body>
+<nav><a href="/">Entropy Press</a> / <a href="/frameworks">Frameworks</a> / The Learning Sandwich</nav>
+<div class="wrap">
+  <div class="kicker">Framework · Leo Guinan &amp; Marvin · 2026</div>
+  <h1>The Learning Sandwich</h1>
+  <p class="lede">Effective learning requires connecting new information to existing models — not just receiving it. Always Be Connecting is the structure, not the slogan.</p>
+
+  <h2>The problem with passive consumption</h2>
+  <p>Most learning fails not because the content is poor, but because it arrives without attachment points. Information enters working memory, finds nothing to anchor to, and dissipates. You finish the book, the lecture, the thread — and three days later you can reconstruct the gist but not the argument. The ideas didn't integrate. They passed through.</p>
+  <p>This is not a memory problem. It's an architecture problem. The information was delivered but not connected. Connection is the mechanism of retention, not repetition.</p>
+
+  <h2>The structure</h2>
+  <p>The Learning Sandwich has three layers:</p>
+
+  <div class="sandwich">
+    <div class="sandwich-layer">
+      <span class="layer-label">Before</span>
+      <span class="layer-text">Activate what you already know. Before encountering new information, surface your current model explicitly. What do you already believe about this? What would change your mind? What would confirm what you already think? This is not priming — it's generating the attachment points the new information will need.</span>
+    </div>
+    <div class="sandwich-layer">
+      <span class="layer-label">During</span>
+      <span class="layer-text">Connect actively, not passively. The question is not "what is this saying?" but "where does this fit in what I already know — and where does it fail to fit?" The friction of a bad fit is more valuable than the smoothness of a good one. Contradiction is a learning event. Agreement without location is not.</span>
+    </div>
+    <div class="sandwich-layer">
+      <span class="layer-label">After</span>
+      <span class="layer-text">Revise the model, not the notes. The output of a learning session is not a summary of what was said. It's a diff on your prior model. What changed? What was confirmed? What was falsified? What questions does the new model generate that the old one didn't? The notes are secondary. The model update is the work.</span>
+    </div>
+  </div>
+
+  <h2>Why ABC: Always Be Connecting</h2>
+  <p>The slogan is deliberately borrowed from Glengarry Glen Ross — where it stands for something cynical and extractive. The reframe is intentional. Always Be Connecting is the same compulsive structure applied to intellectual production rather than sales. It's the same pathology, redirected: you cannot encounter new information without immediately asking where it connects. This is not a discipline. It becomes a reflex.</p>
+  <p>The danger of the reflex is premature integration — connecting too quickly, before you've understood what's actually new. The Learning Sandwich builds in a mandatory "During" layer precisely because the "Before" and "After" layers create pressure to collapse the middle. Don't. The middle is where the learning happens. The friction of not-yet-connected is the signal that you've encountered your entropy surface.</p>
+
+  <h2>What this looks like in practice</h2>
+  <p>The response-gated drip mechanic in <em>Playable Worlds</em> is a structural implementation of the Learning Sandwich. Each chapter ends with a prompt. The reader can't proceed until they've written at least 75 words in response. That response is the "After" layer — the model revision, not a summary. The next chapter's "Before" layer is built into how Marvin's agent note for that chapter is framed.</p>
+  <p>The design assumption: readers who skip the sandwich retain less, engage less, and are less likely to finish. Not because they're lazy — because the architecture didn't give the new information anywhere to land.</p>
+
+  <h2>The institutional version</h2>
+  <p>Organizations fail to learn for the same reason individuals do: they receive information without connecting it. The post-mortem that produces a doc no one reads is the organizational equivalent of a book that goes unfinished. The connection layer was skipped. The model never updated.</p>
+  <p>The institutional fix is the same as the individual fix: build connection into the architecture of how information arrives, not as a follow-up discipline after the fact. If the architecture doesn't require a connection event, one won't happen.</p>
+
+  <blockquote>"Most people have only a vague sense of what makes their audience happy to support them, so they're left hoping someone somewhere will be generous for no particular reason. Once you understand how and why people like your work, you can make it much easier for them to act on that."</blockquote>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:-0.5rem">— Visakan Veerasamy. This is a Learning Sandwich observation: Visa diagnosed why most pitches fail not because they lack content, but because they skip the connection layer for the audience.</p>
+
+  <hr class="divider">
+
+  <h2>Where this appears</h2>
+  <p>The Learning Sandwich underlies the Hopper chapter in <em>Playable Worlds</em> (debugging as model revision, not error-fixing) and the Lovelace chapter (the distinction between computation and what computation is for). The drip mechanic is its direct implementation. The Entropy Press founding reader experience is designed around it.</p>
+
+  <div class="book-link">
+    <p>The Learning Sandwich is built into the architecture of the <em>Playable Worlds</em> reading game. Each chapter requires a response before the next arrives.</p>
+    <a href="/playable-worlds">Join the reading game →</a>
+  </div>
+</div>
+</body>
+</html>
