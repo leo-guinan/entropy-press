@@ -359,10 +359,11 @@
     <form id="signup-form">
       <div class="form-row">
         <input type="email" id="f-email" placeholder="your@email.com" required />
-        <input type="text" id="f-wallet" placeholder="0x wallet address (Base)" />
+        <input type="text" id="f-wallet" placeholder="0x wallet (optional — for NFT)" />
       </div>
       <button type="submit" class="btn" id="submit-btn">Begin the game →</button>
     </form>
+    <p style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-top:0.5rem;">Wallet optional. We'll ask again when your NFT is ready.</p>
     <div id="form-msg" style="margin-top:0.75rem;font-family:var(--mono);font-size:0.75rem;display:none"></div>
     <div class="counter">Founding reader slots remaining: <strong id="slots-remaining" style="color:var(--gold)">100</strong></div>
     <script>
@@ -422,8 +423,8 @@
       <div class="step">
         <div class="step-num">01</div>
         <div>
-          <h4>Sign up with your email and wallet</h4>
-          <p>Your wallet is where your founding reader NFT will be minted. You don't need to connect it — just share the address.</p>
+          <h4>Sign up with your email</h4>
+          <p>Wallet is optional — we'll collect it when your NFT is ready to mint. If you have one now, you can include it. Either way, you're in.</p>
         </div>
       </div>
       <div class="step">
