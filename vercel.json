@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "trailingSlash": false,
+  "cleanUrls": true,
   "routes": [
     { "src": "/playable-worlds", "dest": "/playable-worlds.html" },
     { "src": "/token", "dest": "/token.html" },
@@ -10,21 +12,22 @@
     { "src": "/frameworks/memetic-economics", "dest": "/frameworks/memetic-economics.html" },
     { "src": "/frameworks/learning-sandwich", "dest": "/frameworks/learning-sandwich.html" },
     { "src": "/app", "dest": "/app.html" },
+    { "src": "/benchmark", "dest": "/benchmark.html" },
+    { "src": "/human-os", "dest": "/human-os.html" },
+    { "src": "/human-os/generate", "dest": "/human-os-generate.html" },
+    { "src": "/human-os/leo", "dest": "/human-os-leo.html" },
+    { "src": "/human-os/leaderboard", "dest": "/human-os-leaderboard.html" },
     { "src": "/.well-known/farcaster.json", "dest": "/.well-known/farcaster.json" },
     { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
     {
       "source": "/.well-known/farcaster.json",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
-      ]
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
     },
     {
       "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }]
     }
   ]
 }
