@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burn to Stop — Entropy Press Demo</title>
+  <meta name="description" content="A feedback transaction demo. Listen. Burn. Stop when you've found value." />
+  <meta property="og:title" content="Burn to Stop — Entropy Press" />
+  <meta property="og:description" content="A feedback transaction: (D, B, V). The earlier you stop, the stronger the signal." />
+
+  <style>
+    :root {
+      --bg:      #0a0a08;
+      --surface: #111110;
+      --card:    #161614;
+      --border:  #222220;
+      --gold:    #c8a951;
+      --gold-d:  #8a7035;
+      --cream:   #e8e0cc;
+      --muted:   #6a6a58;
+      --text:    #d0c8b4;
+      --green:   #4caf78;
+      --red:     #e85050;
+      --serif:   Georgia, 'Times New Roman', serif;
+      --mono:    'Courier New', Courier, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--gold); }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 2rem 1rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: .5rem;
+    }
+    .hero .subtitle {
+      color: var(--muted);
+      font-style: italic;
+      font-size: .95rem;
+      margin-bottom: .5rem;
+    }
+    .hero .paper-ref {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--gold-d);
+      letter-spacing: .06em;
+    }
+    .hero .paper-ref a { color: var(--gold-d); }
+
+    /* ── MECHANISM ─────────────────────────────────── */
+    .mechanism {
+      max-width: 640px;
+      margin: 1rem auto 0;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+    .mech-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem .75rem;
+    }
+    .mech-label {
+      font-family: var(--mono);
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--gold-d);
+      margin-bottom: .4rem;
+    }
+    .mech-value {
+      font-size: 1rem;
+      color: var(--cream);
+    }
+    .mech-desc {
+      font-size: .72rem;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    /* ── PLAYER ────────────────────────────────────── */
+    .player-section {
+      max-width: 640px;
+      margin: 2.5rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .burn-display {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .burn-amount {
+      font-family: var(--mono);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      transition: color .2s;
+    }
+    .burn-amount.burning {
+      animation: pulse-gold 1s ease-in-out infinite;
+    }
+    .burn-amount.burned-out {
+      color: var(--muted);
+      animation: none;
+    }
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .7; }
+    }
+    .burn-rate-label {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      margin-top: .3rem;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      position: relative;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 1.5rem 0;
+      cursor: pointer;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      width: 0%;
+      transition: width .25s linear;
+    }
+    .progress-time {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--muted);
+      margin-top: .4rem;
+    }
+
+    /* Play button */
+    .play-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      align-items: center;
+    }
+    .play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s;
+    }
+    .play-btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .play-btn.playing {
+      border-color: var(--gold-d);
+    }
+
+    /* Stop burn button */
+    .stop-btn {
+      font-family: var(--mono);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: .7rem 1.8rem;
+      border: 1px solid var(--gold-d);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all .15s;
+    }
+    .stop-btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .stop-btn:disabled {
+      border-color: var(--border);
+      color: var(--muted);
+      cursor: default;
+    }
+    .stop-btn:disabled:hover {
+      background: transparent;
+      color: var(--muted);
+    }
+    .stop-btn.stopped {
+      border-color: var(--green);
+      color: var(--green);
+    }
+    .stop-btn.exhausted {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    /* ── RESULT ────────────────────────────────────── */
+    .result-section {
+      max-width: 640px;
+      margin: 2.5rem auto 0;
+      padding: 0 2rem 4rem;
+      display: none;
+    }
+    .result-section.show { display: block; }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+    .result-card h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .result-cell {
+      background: var(--card);
+      padding: 1rem;
+      text-align: center;
+    }
+    .result-cell .label {
+      font-family: var(--mono);
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+    .result-cell .value {
+      font-family: var(--mono);
+      font-size: 1.3rem;
+      color: var(--cream);
+    }
+    .result-cell .value.gold { color: var(--gold); }
+    .result-cell .value.green { color: var(--green); }
+    .result-cell .value.red { color: var(--red); }
+
+    .result-explain {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-left: 2px solid var(--gold-d);
+      padding-left: 1rem;
+      margin-top: 1.5rem;
+    }
+    .result-explain strong {
+      color: var(--cream);
+      font-weight: 400;
+    }
+
+    /* ── SHARE ─────────────────────────────────────── */
+    .share-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .share-btn {
+      font-family: var(--mono);
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: .5rem 1.2rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all .15s;
+    }
+    .share-btn:hover {
+      border-color: var(--gold-d);
+      color: var(--gold);
+    }
+
+    /* ── THEORY ────────────────────────────────────── */
+    .theory-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .theory-section h3 {
+      font-family: var(--mono);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--gold-d);
+      margin-bottom: 1rem;
+    }
+    .theory-section p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: .8rem;
+    }
+    .theory-section code {
+      font-family: var(--mono);
+      font-size: .78rem;
+      color: var(--gold);
+      background: var(--surface);
+      padding: .15rem .4rem;
+      border-radius: 2px;
+    }
+
+    /* ── TOAST ─────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--surface);
+      border: 1px solid var(--gold-d);
+      color: var(--cream);
+      font-family: var(--mono);
+      font-size: .75rem;
+      padding: .6rem 1.2rem;
+      border-radius: 3px;
+      opacity: 0;
+      transition: all .25s;
+      pointer-events: none;
+      z-index: 100;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: .65rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--gold-d); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/">Entropy Press</a>
+  <a href="/satoshi">Satoshi, The Musical</a>
+</nav>
+
+<div class="hero">
+  <h1>Burn to Stop</h1>
+  <p class="subtitle">A feedback transaction in three variables.<br/>The earlier you stop, the stronger the signal.</p>
+  <p class="paper-ref">
+    from <a href="https://www.proofeditor.ai/d/ht13odpw" target="_blank">The Spontaneous Institution</a>
+    — (D, B, V)
+  </p>
+</div>
+
+<div class="mechanism">
+  <div class="mech-item">
+    <div class="mech-label">D — Payload</div>
+    <div class="mech-value">3:47</div>
+    <div class="mech-desc">Track duration</div>
+  </div>
+  <div class="mech-item">
+    <div class="mech-label">B — Budget</div>
+    <div class="mech-value" id="mech-budget">1000</div>
+    <div class="mech-desc"><span id="mech-rate">5</span> tokens/sec</div>
+  </div>
+  <div class="mech-item">
+    <div class="mech-label">V — Signal</div>
+    <div class="mech-value" id="mech-signal">—</div>
+    <div class="mech-desc">fraction saved</div>
+  </div>
+</div>
+
+<div class="player-section">
+  <div class="burn-display">
+    <div class="burn-amount" id="burn-amount">1000</div>
+    <div class="burn-rate-label">tokens remaining · <span id="burn-status">ready</span></div>
+  </div>
+
+  <div class="progress-wrap" id="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-time">
+    <span id="time-current">0:00</span>
+    <span id="time-total">3:47</span>
+  </div>
+
+  <div class="play-row">
+    <button class="play-btn" id="play-btn" aria-label="Play">▶</button>
+    <button class="stop-btn" id="stop-btn" disabled>Stop Burn</button>
+  </div>
+</div>
+
+<div class="result-section" id="result-section">
+  <div class="result-card">
+    <h2 id="result-title">Transaction Closed</h2>
+
+    <div class="result-grid">
+      <div class="result-cell">
+        <div class="label">Time Listened</div>
+        <div class="value" id="r-time">—</div>
+      </div>
+      <div class="result-cell">
+        <div class="label">Tokens Burned</div>
+        <div class="value red" id="r-burned">—</div>
+      </div>
+      <div class="result-cell">
+        <div class="label">Tokens Saved</div>
+        <div class="value green" id="r-saved">—</div>
+      </div>
+      <div class="result-cell">
+        <div class="label">Fraction Saved</div>
+        <div class="value gold" id="r-fraction">—</div>
+      </div>
+    </div>
+
+    <div class="result-explain" id="result-explain">
+      The forcing function: <strong>dV/dT = r</strong>. You stopped when the marginal
+      cost of one more second equaled the marginal value of listening.
+    </div>
+
+    <div class="share-row">
+      <button class="share-btn" id="share-btn">Copy Result</button>
+      <a class="share-btn" href="/satoshi">Full Experience →</a>
+    </div>
+  </div>
+</div>
+
+<div class="theory-section">
+  <h3>How This Works</h3>
+  <p>
+    This is a concrete instance of the <strong>feedback transaction (D, B, V)</strong>
+    from the Spontaneous Institution paper.
+  </p>
+  <p>
+    <strong>D</strong> is the data payload — this track. <strong>B</strong> is the attention
+    budget — 1000 tokens burning at 5/sec. <strong>V</strong> is the value you generate by
+    stopping — your fraction saved is a continuous signal of perceived quality.
+  </p>
+  <p>
+    No ratings. No reviews. The evaluation <em>is</em> the data:
+    how long you stayed, how much you burned, when you chose to close.
+  </p>
+  <p>
+    The forcing function <code>dV/dT = r</code> says the optimal close time is when
+    one more second of listening costs exactly one more token. Every person who stops
+    early makes the remaining supply scarcer.
+  </p>
+</div>
+
+<footer>
+  entropypress.xyz · feedback transaction demo ·
+  <a href="https://www.proofeditor.ai/d/ht13odpw" target="_blank">read the paper</a>
+</footer>
+
+<div id="toast"></div>
+
+<audio id="audio" preload="auto">
+  <source src="https://satoshi.entropypress.xyz/audio/satoshi_track_01.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+// ── CONSTANTS ──────────────────────────────────────────────────────────────
+const TOTAL_BUDGET   = 1000;
+const BURN_RATE      = 5;        // tokens per second
+const TRACK_DURATION = 227.4;    // seconds (3:47)
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let budget        = TOTAL_BUDGET;
+let burnInterval  = null;
+let startTime     = null;
+let stoppedAt     = null;
+let burned        = 0;
+let state         = 'ready';  // ready | burning | stopped | exhausted
+
+// ── DOM ────────────────────────────────────────────────────────────────────
+const audio       = document.getElementById('audio');
+const playBtn     = document.getElementById('play-btn');
+const stopBtn     = document.getElementById('stop-btn');
+const burnDisplay = document.getElementById('burn-amount');
+const burnStatus  = document.getElementById('burn-status');
+const progressFill= document.getElementById('progress-fill');
+const timeCurrent = document.getElementById('time-current');
+const timeTotal   = document.getElementById('time-total');
+const mechSignal  = document.getElementById('mech-signal');
+
+// ── HELPERS ────────────────────────────────────────────────────────────────
+function fmtTime(s) {
+  const m  = Math.floor(s / 60);
+  const ss = Math.floor(s % 60).toString().padStart(2, '0');
+  return `${m}:${ss}`;
+}
+
+function toast(msg, dur = 4000) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), dur);
+}
+
+// ── PLAY ───────────────────────────────────────────────────────────────────
+function togglePlay() {
+  if (audio.paused) {
+    if (state === 'stopped' || state === 'exhausted') {
+      // Replay — just play audio, don't restart burn
+      audio.play().catch(e => console.warn('Playback:', e));
+      playBtn.classList.add('playing');
+      playBtn.textContent = '❚❚';
+      return;
+    }
+    audio.play().catch(e => console.warn('Playback:', e));
+    playBtn.classList.add('playing');
+    playBtn.textContent = '❚❚';
+
+    if (state === 'ready') {
+      startBurn();
+    }
+  } else {
+    audio.pause();
+    playBtn.classList.remove('playing');
+    playBtn.textContent = '▶';
+  }
+}
+
+playBtn.addEventListener('click', togglePlay);
+
+// Seek
+document.getElementById('progress-bar').addEventListener('click', e => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct  = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = pct * TRACK_DURATION;
+});
+
+// Time update
+audio.addEventListener('timeupdate', () => {
+  const t   = audio.currentTime;
+  const pct = (t / TRACK_DURATION) * 100;
+  progressFill.style.width = pct + '%';
+  timeCurrent.textContent = fmtTime(t);
+});
+
+audio.addEventListener('loadedmetadata', () => {
+  timeTotal.textContent = fmtTime(audio.duration || TRACK_DURATION);
+});
+
+audio.addEventListener('ended', () => {
+  playBtn.classList.remove('playing');
+  playBtn.textContent = '▶';
+  if (state === 'burning') {
+    exhaust();
+  }
+});
+
+// ── BURN ───────────────────────────────────────────────────────────────────
+function startBurn() {
+  state     = 'burning';
+  startTime = Date.now();
+  budget    = TOTAL_BUDGET;
+  burned    = 0;
+
+  burnDisplay.classList.add('burning');
+  burnStatus.textContent = 'burning';
+  stopBtn.disabled = false;
+  stopBtn.classList.remove('stopped', 'exhausted');
+
+  burnInterval = setInterval(() => {
+    if (budget <= 0) {
+      exhaust();
+      return;
+    }
+    const elapsed = (Date.now() - startTime) / 1000;
+    burned = Math.min(BURN_RATE * elapsed, TOTAL_BUDGET);
+    budget = TOTAL_BUDGET - burned;
+
+    burnDisplay.textContent = Math.floor(budget);
+    mechSignal.textContent = (budget / TOTAL_BUDGET).toFixed(2);
+  }, 100); // 10Hz update for smooth counter
+}
+
+function stopBurn() {
+  if (state !== 'burning') return;
+
+  clearInterval(burnInterval);
+  burnInterval = null;
+  stoppedAt    = Date.now();
+
+  const elapsed = (stoppedAt - startTime) / 1000;
+  burned        = Math.min(BURN_RATE * elapsed, TOTAL_BUDGET);
+  budget        = TOTAL_BUDGET - burned;
+
+  state = 'stopped';
+  burnDisplay.textContent = Math.floor(budget);
+  burnDisplay.classList.remove('burning');
+  burnStatus.textContent = 'stopped';
+
+  stopBtn.textContent = 'Stopped';
+  stopBtn.classList.add('stopped');
+  stopBtn.disabled = true;
+
+  // Pause audio to freeze the moment
+  audio.pause();
+  playBtn.classList.remove('playing');
+  playBtn.textContent = '▶';
+
+  showResult(elapsed, burned, budget);
+}
+
+function exhaust() {
+  clearInterval(burnInterval);
+  burnInterval = null;
+
+  burned = TOTAL_BUDGET;
+  budget = 0;
+  state  = 'exhausted';
+
+  burnDisplay.textContent = '0';
+  burnDisplay.classList.remove('burning');
+  burnDisplay.classList.add('burned-out');
+  burnStatus.textContent = 'exhausted';
+
+  stopBtn.textContent = 'Exhausted';
+  stopBtn.classList.add('exhausted');
+  stopBtn.disabled = true;
+
+  showResult(TRACK_DURATION, TOTAL_BUDGET, 0);
+}
+
+stopBtn.addEventListener('click', stopBurn);
+
+// ── RESULT ─────────────────────────────────────────────────────────────────
+function showResult(elapsed, tokensBurned, tokensSaved) {
+  const section = document.getElementById('result-section');
+  section.classList.add('show');
+
+  const fraction = tokensSaved / TOTAL_BUDGET;
+  const signal   = fraction > 0.5 ? 'strong early signal'
+                : fraction > 0.2 ? 'moderate signal'
+                : fraction > 0   ? 'late signal'
+                : 'full exposure';
+
+  document.getElementById('r-time').textContent     = fmtTime(elapsed);
+  document.getElementById('r-burned').textContent    = Math.floor(tokensBurned);
+  document.getElementById('r-saved').textContent     = Math.floor(tokensSaved);
+  document.getElementById('r-fraction').textContent  = fraction.toFixed(3);
+
+  document.getElementById('mech-signal').textContent = fraction.toFixed(2);
+  document.getElementById('result-title').textContent = signal;
+
+  // Dynamic explanation
+  const explain = document.getElementById('result-explain');
+  if (fraction === 0) {
+    explain.innerHTML =
+      'You burned everything. Full exposure — the content consumed the entire budget. ' +
+      'In the paper\'s terms, the forcing function <strong>dV/dT = r</strong> never ' +
+      'reached equilibrium: you never found the point where stopping was worth more ' +
+      'than continuing.';
+  } else if (fraction > 0.7) {
+    explain.innerHTML =
+      'You stopped fast. <strong>' + Math.floor(tokensSaved) + ' tokens saved</strong> ' +
+      'is a strong early signal — you found value quickly enough to protect most of the budget. ' +
+      'In feedback transaction terms: the marginal value of listening dropped below the ' +
+      'burn rate within <strong>' + fmtTime(elapsed) + '</strong>.';
+  } else {
+    explain.innerHTML =
+      'You listened for <strong>' + fmtTime(elapsed) + '</strong> and saved ' +
+      '<strong>' + Math.floor(tokensSaved) + ' tokens</strong>. The forcing function ' +
+      '<strong>dV/dT = r</strong> found its equilibrium at fraction <strong>' +
+      fraction.toFixed(2) + '</strong>. Every person\'s stop time generates a unique point ' +
+      'on the value curve — yours says: <em>' + signal + '</em>.';
+  }
+
+  // Share
+  document.getElementById('share-btn').onclick = () => {
+    const text = `Burn to Stop demo\n` +
+      `Listened: ${fmtTime(elapsed)} | Burned: ${Math.floor(tokensBurned)} | Saved: ${Math.floor(tokensSaved)} | Fraction: ${fraction.toFixed(3)}\n` +
+      `Signal: ${signal}\nhttps://demo.entropypress.xyz`;
+    navigator.clipboard.writeText(text).then(() => toast('Copied'));
+  };
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── VISIBILITY ─────────────────────────────────────────────────────────────
+// Don't let background tab pausing mess with the burn timer display.
+// The burn is server-authoritative (Date.now()), but the display should stay smooth.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && state === 'burning') {
+    // Force a sync when tab comes back
+  } else if (!document.hidden && state === 'burning' && startTime) {
+    const elapsed = (Date.now() - startTime) / 1000;
+    burned = Math.min(BURN_RATE * elapsed, TOTAL_BUDGET);
+    budget = TOTAL_BUDGET - burned;
+    burnDisplay.textContent = Math.floor(budget);
+    if (budget <= 0) exhaust();
+  }
+});
+</script>
+</body>
+</html>

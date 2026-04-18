@@ -3,6 +3,11 @@
   "trailingSlash": false,
   "cleanUrls": true,
   "routes": [
+    { "src": "/satoshi", "dest": "/satoshi.html" },
+    { "src": "/cyberdeck", "dest": "/cyberdeck.html" },
+    { "src": "/cyberdeck/a", "dest": "/cyberdeck-a.html" },
+    { "src": "/cyberdeck-a", "dest": "/cyberdeck-a.html" },
+    { "src": "/satoshi/claim", "dest": "/satoshi-claim.html" },
     { "src": "/playable-worlds", "dest": "/playable-worlds.html" },
     { "src": "/token", "dest": "/token.html" },
     { "src": "/frameworks", "dest": "/frameworks.html" },
@@ -18,12 +23,25 @@
     { "src": "/human-os/leo", "dest": "/human-os-leo.html" },
     { "src": "/human-os/leaderboard", "dest": "/human-os-leaderboard.html" },
     { "src": "/.well-known/farcaster.json", "dest": "/.well-known/farcaster.json" },
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "/demo", "dest": "/demo.html" }
   ],
   "headers": [
     {
       "source": "/.well-known/farcaster.json",
       "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+    },
+    {
+      "source": "/satoshi",
+      "headers": [
+        { "key": "Permissions-Policy", "value": "camera=(self), microphone=()" },
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" }
+      ]
+    },
+    {
+      "source": "/satoshi/claim",
+      "headers": [
+        { "key": "Permissions-Policy", "value": "camera=*" }
+      ]
     },
     {
       "source": "/(.*)",
