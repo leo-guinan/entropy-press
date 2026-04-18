@@ -23,7 +23,8 @@
     { "src": "/human-os/leo", "dest": "/human-os-leo.html" },
     { "src": "/human-os/leaderboard", "dest": "/human-os-leaderboard.html" },
     { "src": "/.well-known/farcaster.json", "dest": "/.well-known/farcaster.json" },
-    { "src": "/demo", "dest": "/demo.html" }
+    { "src": "/demo", "dest": "/demo.html" },
+    { "src": "/", "has": [{"type": "host", "value": "demo.entropypress.xyz"}], "dest": "/demo.html" }
   ],
   "headers": [
     {
